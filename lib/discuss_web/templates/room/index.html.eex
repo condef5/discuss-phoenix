@@ -5,7 +5,9 @@
     </h3>
     <ul class="list-group">
       <%= for room <- @rooms do %>
-        <li class="list-group-item"><%= room.name %></li>
+        <li class="list-group-item">
+          <%= link room.name, to: Routes.room_path(@conn, :show, room.id) %>
+        </li>
       <% end %>
 
     </ul>

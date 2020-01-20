@@ -13,6 +13,11 @@ defmodule DiscussWeb.RoomController do
     render conn, "new.html", changeset: changeset
   end
 
+  def show(conn, %{"id" => id}) do
+    room = Conversation.get_room!(id)
+    render conn, "show.html", room: room
+  end
+
   def create(conn, %{"room" => room_params}) do
     case Conversation.create_room(room_params) do
       {:ok, _room} ->

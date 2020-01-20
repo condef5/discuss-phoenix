@@ -17,6 +17,7 @@ defmodule DiscussWeb.Router do
     pipe_through :browser
     get "/", RoomController, :index
     get "/rooms/new", RoomController, :new
+    get "/rooms/:id", RoomController, :show 
     post "/rooms", RoomController, :create
   end
 
