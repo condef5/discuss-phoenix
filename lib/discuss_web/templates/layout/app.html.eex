@@ -6,30 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Discuss · Phoenix Framework</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+
   </head>
   <body>
-    <header>
-      <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Prater</a>
-          </div>
-        </div>
-      </div>
+    <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">
+        <a href="/" class="navbar-brand text-dark"><strong>Prater</strong></a>
+      </h5>
     </header>
     <main role="main" class="container">
-      <%= Enum.map(get_flash(@conn), fn {flash_key, flash_message} -> %>
-        <p class="alert alert-<%= flash_key %>"><%= flash_message %></p>
-      <% end) %>
+      <%= unless is_nil(get_flash(@conn, :info)) do %>
+        <p class="alert alert-success" role="alert"><%= get_flash(@conn, :info) %></p>
+      <% end %>
+      <%= unless is_nil(get_flash(@conn, :error)) do %>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <% end %>
       <%= render @view_module, @view_template, assigns %>
     </main>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
