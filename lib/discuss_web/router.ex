@@ -21,6 +21,7 @@ defmodule DiscussWeb.Router do
     get "/rooms/:id", RoomController, :show
     post "/rooms", RoomController, :create
     put "/rooms", RoomController, :update
+    delete "/rooms/:id", RoomController, :delete
   end
 
   # Other scopes may use custom stacks.

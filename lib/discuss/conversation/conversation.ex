@@ -24,4 +24,6 @@ defmodule Discuss.Conversation do
 
   def get_room!(id), do: Repo.get!(Room, id)
 
+  def delete_room(%Room{} = room), do: Repo.delete(room)
+
 end
