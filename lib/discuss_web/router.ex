@@ -16,12 +16,7 @@ defmodule DiscussWeb.Router do
   scope "/", DiscussWeb do
     pipe_through :browser
     get "/", RoomController, :index
-    get "/rooms/new", RoomController, :new
-    get "/rooms/:id/edit", RoomController, :edit
-    get "/rooms/:id", RoomController, :show
-    post "/rooms", RoomController, :create
-    put "/rooms", RoomController, :update
-    delete "/rooms/:id", RoomController, :delete
+    resources "/rooms", RoomController
   end
 
   # Other scopes may use custom stacks.
