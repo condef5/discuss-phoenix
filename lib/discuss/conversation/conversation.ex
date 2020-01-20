@@ -16,6 +16,12 @@ defmodule Discuss.Conversation do
     |> Repo.insert()
   end
 
+  def update_room(%Room{} = room, attrs) do
+    room
+    |> Room.changeset(attrs)
+    |> Repo.update()
+  end
+
   def get_room!(id), do: Repo.get!(Room, id)
 
 end
