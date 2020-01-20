@@ -17,6 +17,8 @@ defmodule DiscussWeb.Router do
     pipe_through :browser
     get "/", RoomController, :index
     resources "/rooms", RoomController
+    resources "/sessions", SessionController, only: [:new, :create]
+    delete "/sign_out", SessionController, :delete
   end
 
   # Other scopes may use custom stacks.

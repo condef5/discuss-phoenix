@@ -5,14 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Discuss · Phoenix Framework</title>
-    <!-- Latest compiled and minified CSS -->
-
   </head>
   <body>
     <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
       <h5 class="my-0 mr-md-auto font-weight-normal">
-        <a href="/" class="navbar-brand text-dark"><strong>Prater</strong></a>
+        <a href="/" class="navbar-brand text-dark"><strong>Discuss</strong></a>
       </h5>
+      <%= if Discuss.Auth.user_signed_in?(@conn) do %>
+        <nav class="my-2 my-md-0 mr-md-3">
+          Signed in as: <strong><%= Discuss.Auth.current_user(@conn).username %></strong>
+        </nav>
+        <%= link "Sign Out", to: Routes.session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary" %>
+      <% else %>
+        <%= link "Sign In",
+          to: Routes.session_path(@conn, :new),
+          class: "btn btn-outline-primary" %>
+      <% end %>
+
     </header>
     <main role="main" class="container">
       <%= unless is_nil(get_flash(@conn, :info)) do %>
