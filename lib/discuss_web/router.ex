@@ -18,6 +18,7 @@ defmodule DiscussWeb.Router do
     get "/", RoomController, :index
     resources "/rooms", RoomController
     resources "/sessions", SessionController, only: [:new, :create]
+    resources "/registrations", RegistrationController, only: [:new, :create]
     delete "/sign_out", SessionController, :delete
   end
 

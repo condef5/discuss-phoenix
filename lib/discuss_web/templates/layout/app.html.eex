@@ -20,6 +20,9 @@
         <%= link "Sign In",
           to: Routes.session_path(@conn, :new),
           class: "btn btn-outline-primary" %>
+        <%= link "Sign Up",
+          to: Routes.registration_path(@conn, :new),
+          class: "btn btn-outline-primary ml-md-3" %>
       <% end %>
 
     </header>

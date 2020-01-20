@@ -2,6 +2,10 @@ defmodule Discuss.Auth do
   alias Discuss.Repo
   alias Discuss.Auth.User
 
+  def register(params) do
+    User.registration_changeset(%User{}, params) |> Repo.insert()
+  end
+
   def sign_in(email, password) do
     user = Repo.get_by(User, email: email)
 
