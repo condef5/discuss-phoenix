@@ -24,7 +24,7 @@
         Choose the room on the left to join
       </p>
       <p class="lead text-muted">
-        or <a href="" class="btn btn-success">Create</a> a new one
+        or <%= link "Create", to: "/rooms/new", class: "btn btn-success" %> a new one
       </p>
     </section>
   </div>

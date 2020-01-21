@@ -2,8 +2,10 @@ defmodule DiscussWeb.RoomController do
   use DiscussWeb, :controller
   alias Discuss.Conversation
   alias Discuss.Conversation.Room
+  alias Discuss.Auth.Authorizer
 
   plug DiscussWeb.Plugs.AuthenticateUser when action not in [:index]
+  plug :authorize_user when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     rooms = Conversation.list_rooms()
@@ -58,6 +60,20 @@ defmodule DiscussWeb.RoomController do
     conn
     |> put_flash(:info, "Room deleted successfully.")
     |> redirect(to: Routes.room_path(conn, :index))
+  end
+
+  defp authorize_user(conn, _params) do
+    %{params: %{"id" => room_id}} = conn
+    room = Conversation.get_room!(room_id)
+
+    if Authorizer.can_manage?(conn.assigns.current_user, room) do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorized to access that page")
+      |> redirect(to: Routes.room_path(conn, :index))
+      |> halt()
+    end
   end
 
 end
