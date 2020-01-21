@@ -3,6 +3,8 @@ defmodule DiscussWeb.RoomController do
   alias Discuss.Conversation
   alias Discuss.Conversation.Room
 
+  plug DiscussWeb.Plugs.AuthenticateUser when action not in [:index]
+
   def index(conn, _params) do
     rooms = Conversation.list_rooms()
     render conn, "index.html", rooms: rooms
