@@ -6,6 +6,7 @@ defmodule Discuss.Conversation.Room do
     field :description, :string
     field :name, :string
     field :topic, :string
+    belongs_to :user, Discuss.Auth.User
 
     timestamps()
   end
